@@ -11,4 +11,6 @@
 ###> Other files ###
 .idea
 .env.local
+.DS_store
+.docker-sync
 ###< Other files ###
