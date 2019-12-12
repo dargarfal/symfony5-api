@@ -56,4 +56,3 @@ volumes:
 
 networks:
   sf5-expenses-api-network:
-    name: sf5-expenses-api-local-network
