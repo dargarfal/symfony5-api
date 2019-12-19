@@ -73,7 +73,7 @@ ssh-be: ## ssh's into the be container
 
 code-style: ## Runs php-cs to fix code styling following Symfony rules
 	php-cs-fixer fix src --rules=@Symfony
-#	php-cs-fixer fix tests --rules=@Symfony
+	php-cs-fixer fix tests --rules=@Symfony
 
 generate-ssh-keys: ## Generate ssh keys in the container
 	U_ID=${UID} docker exec -it --user ${UID} ${DOCKER_BE} mkdir -p config/jwt
