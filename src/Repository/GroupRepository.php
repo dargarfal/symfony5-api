@@ -26,10 +26,15 @@ class GroupRepository extends BaseRepository
     {
         foreach ($group->getUsers() as $userGroup) {
             if ($userGroup->getId() === $user->getId()) {
-                return  true;
+                return true;
             }
         }
 
         return false;
+    }
+
+    public function save(Group $group): void
+    {
+        $this->saveEntity($group);
     }
 }
