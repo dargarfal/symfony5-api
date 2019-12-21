@@ -29,6 +29,9 @@ class User implements UserInterface
     /** @var Collection|Group[] */
     protected ?Collection $groups = null;
 
+    /** @var Collection|Category[] */
+    protected ?Collection $categories = null;
+
     /**
      * @throws \Exception
      */
@@ -40,6 +43,7 @@ class User implements UserInterface
         $this->roles[] = Role::ROLE_USER;
         $this->createdAt = new \DateTime();
         $this->groups = new ArrayCollection();
+        $this->categories = new ArrayCollection();
         $this->markAsUpdated();
     }
 
@@ -137,5 +141,13 @@ class User implements UserInterface
     public function removeGroup(Group $group): void
     {
         $this->groups->removeElement($group);
+    }
+
+    /**
+     * @return Collection|Category[]
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
     }
 }
