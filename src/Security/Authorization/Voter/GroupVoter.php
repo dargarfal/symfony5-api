@@ -16,7 +16,7 @@ class GroupVoter extends BaseVoter
     private const GROUP_UPDATE = 'GROUP_UPDATE';
     private const GROUP_DELETE = 'GROUP_DELETE';
 
-    protected function supports(string $attribute, $subject)
+    protected function supports(string $attribute, $subject): bool
     {
         return \in_array($attribute, $this->getSupportedAttributes(), true);
     }
@@ -24,7 +24,7 @@ class GroupVoter extends BaseVoter
     /**
      * @param Group|null $subject
      */
-    protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token)
+    protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
     {
         /** @var User $tokenUser */
         $tokenUser = $token->getUser();
