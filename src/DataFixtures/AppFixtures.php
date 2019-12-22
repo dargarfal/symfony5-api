@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Category;
 use App\Entity\Group;
 use App\Entity\User;
 use App\Security\Role;
@@ -31,11 +32,23 @@ class AppFixtures extends Fixture
 
             $manager->persist($user);
 
+            foreach ($userData['categories'] as $categoryData) {
+                $category = new Category($categoryData['name'], $user, null, $categoryData['id']);
+
+                $manager->persist($category);
+            }
+
             foreach ($userData['groups'] as $groupData) {
                 $group = new Group($groupData['name'], $user, $groupData['id']);
                 $group->addUser($user);
 
                 $manager->persist($group);
+
+                foreach ($groupData['categories'] as $categoryData) {
+                    $category = new Category($categoryData['name'], $user, $group, $categoryData['id']);
+
+                    $manager->persist($category);
+                }
             }
         }
 
@@ -58,6 +71,18 @@ class AppFixtures extends Fixture
                     [
                         'id' => '0c9a412e-2f5a-41f8-b449-6f6bcd25e003',
                         'name' => 'Admin\'s Group',
+                        'categories' => [
+                            [
+                                'id' => '0c9a412e-2f5a-41f8-b449-6f6bcd25e006',
+                                'name' => 'Admin\'s Group category',
+                            ],
+                        ],
+                    ],
+                ],
+                'categories' => [
+                    [
+                        'id' => '0c9a412e-2f5a-41f8-b449-6f6bcd25e005',
+                        'name' => 'Admin\'s category',
                     ],
                 ],
             ],
@@ -71,6 +96,18 @@ class AppFixtures extends Fixture
                     [
                         'id' => '0c9a412e-2f5a-41f8-b449-6f6bcd25e004',
                         'name' => 'User\'s Group',
+                        'categories' => [
+                            [
+                                'id' => '0c9a412e-2f5a-41f8-b449-6f6bcd25e008',
+                                'name' => 'Admin\'s Group category',
+                            ],
+                        ],
+                    ],
+                ],
+                'categories' => [
+                    [
+                        'id' => '0c9a412e-2f5a-41f8-b449-6f6bcd25e007',
+                        'name' => 'User\'s category',
                     ],
                 ],
             ],

@@ -24,6 +24,10 @@ class TestBase extends WebTestCase
         'user_id' => '0c9a412e-2f5a-41f8-b449-6f6bcd25e002',
         'admin_group_id' => '0c9a412e-2f5a-41f8-b449-6f6bcd25e003',
         'user_group_id' => '0c9a412e-2f5a-41f8-b449-6f6bcd25e004',
+        'admin_category_id' => '0c9a412e-2f5a-41f8-b449-6f6bcd25e005',
+        'user_category_id' => '0c9a412e-2f5a-41f8-b449-6f6bcd25e007',
+        'admin_group_category_id' => '0c9a412e-2f5a-41f8-b449-6f6bcd25e006',
+        'user_group_category_id' => '0c9a412e-2f5a-41f8-b449-6f6bcd25e008',
     ];
 
     protected static ?KernelBrowser $client = null;
