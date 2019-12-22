@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Functional\Api\User;
+namespace App\Tests\Functional\Api\Group;
 
+use App\Tests\Functional\Api\User\UserTestBase;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class GetGroupCategoriesTest extends UserTestBase
