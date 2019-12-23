@@ -81,4 +81,13 @@ class Category
 
         return false;
     }
+
+    public function isOwnedByGroup(Group $group): bool
+    {
+        if (null !== $this->getGroup()) {
+            return $this->getGroup()->getId() === $group->getId();
+        }
+
+        return false;
+    }
 }

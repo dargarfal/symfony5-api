@@ -96,4 +96,9 @@ class Expense
     {
         $this->updatedAt = new \DateTime();
     }
+
+    public function isOwnedBy(User $user): bool
+    {
+        return $this->getUser()->getId() === $user->getId();
+    }
 }
