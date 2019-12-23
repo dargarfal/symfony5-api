@@ -67,6 +67,11 @@ class Expense
         return $this->group;
     }
 
+    public function getAmount(): float
+    {
+        return $this->amount;
+    }
+
     public function setAmount(float $amount): void
     {
         $this->amount = $amount;

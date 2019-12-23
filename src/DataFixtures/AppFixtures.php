@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Category;
+use App\Entity\Expense;
 use App\Entity\Group;
 use App\Entity\User;
 use App\Security\Role;
@@ -36,6 +37,19 @@ class AppFixtures extends Fixture
                 $category = new Category($categoryData['name'], $user, null, $categoryData['id']);
 
                 $manager->persist($category);
+
+                foreach ($categoryData['expenses'] as $expenseData) {
+                    $expense = new Expense(
+                        $category,
+                        $user,
+                        $expenseData['amount'],
+                        $expenseData['description'],
+                        null,
+                        $expenseData['id']
+                    );
+
+                    $manager->persist($expense);
+                }
             }
 
             foreach ($userData['groups'] as $groupData) {
@@ -48,6 +62,19 @@ class AppFixtures extends Fixture
                     $category = new Category($categoryData['name'], $user, $group, $categoryData['id']);
 
                     $manager->persist($category);
+
+                    foreach ($categoryData['expenses'] as $expenseData) {
+                        $expense = new Expense(
+                            $category,
+                            $user,
+                            $expenseData['amount'],
+                            $expenseData['description'],
+                            $group,
+                            $expenseData['id']
+                        );
+
+                        $manager->persist($expense);
+                    }
                 }
             }
         }
@@ -75,6 +102,13 @@ class AppFixtures extends Fixture
                             [
                                 'id' => '0c9a412e-2f5a-41f8-b449-6f6bcd25e006',
                                 'name' => 'Admin\'s Group category',
+                                'expenses' => [
+                                    [
+                                        'id' => '0c9a412e-2f5a-41f8-b449-6f6bcd25e010',
+                                        'amount' => 200,
+                                        'description' => 'Admin\'s group expense description',
+                                    ],
+                                ],
                             ],
                         ],
                     ],
@@ -83,6 +117,13 @@ class AppFixtures extends Fixture
                     [
                         'id' => '0c9a412e-2f5a-41f8-b449-6f6bcd25e005',
                         'name' => 'Admin\'s category',
+                        'expenses' => [
+                            [
+                                'id' => '0c9a412e-2f5a-41f8-b449-6f6bcd25e009',
+                                'amount' => 100,
+                                'description' => 'Admin expense description',
+                            ],
+                        ],
                     ],
                 ],
             ],
@@ -100,6 +141,13 @@ class AppFixtures extends Fixture
                             [
                                 'id' => '0c9a412e-2f5a-41f8-b449-6f6bcd25e008',
                                 'name' => 'Admin\'s Group category',
+                                'expenses' => [
+                                    [
+                                        'id' => '0c9a412e-2f5a-41f8-b449-6f6bcd25e012',
+                                        'amount' => 400,
+                                        'description' => 'User\'s group expense description',
+                                    ],
+                                ],
                             ],
                         ],
                     ],
@@ -108,6 +156,13 @@ class AppFixtures extends Fixture
                     [
                         'id' => '0c9a412e-2f5a-41f8-b449-6f6bcd25e007',
                         'name' => 'User\'s category',
+                        'expenses' => [
+                            [
+                                'id' => '0c9a412e-2f5a-41f8-b449-6f6bcd25e011',
+                                'amount' => 300,
+                                'description' => 'User expense description',
+                            ],
+                        ],
                     ],
                 ],
             ],
