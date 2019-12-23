@@ -9,7 +9,11 @@ App\Entity\Group:
   oneToMany:
     categories:
       targetEntity: Category
-      mappedBy: user
+      mappedBy: group
+      cascade: [remove]
+    expenses:
+      targetEntity: Expense
+      mappedBy: group
       cascade: [remove]
 
   manyToOne:
