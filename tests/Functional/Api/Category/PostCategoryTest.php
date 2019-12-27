@@ -74,7 +74,7 @@ class PostCategoryTest extends CategoryTestBase
 
         $response = self::$admin->getResponse();
 
-        $this->assertEquals(JsonResponse::HTTP_BAD_REQUEST, $response->getStatusCode());
+        $this->assertEquals(JsonResponse::HTTP_FORBIDDEN, $response->getStatusCode());
     }
 
     public function testCreateCategoryForAnotherGroup(): void

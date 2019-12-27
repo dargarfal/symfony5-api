@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Exception\Group;
 
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
-class CannotManageGroupException extends BadRequestHttpException
+class CannotManageGroupException extends AccessDeniedHttpException
 {
     private const MESSAGE = 'You cannot manage this group';
 
