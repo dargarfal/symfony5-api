@@ -10,9 +10,9 @@ class Expense
 {
     private string $id;
 
-    private Category $category;
+    private ?Category $category = null;
 
-    private User $user;
+    private ?User $user = null;
 
     private ?Group $group = null;
 
@@ -24,6 +24,9 @@ class Expense
 
     private ?\DateTime $updatedAt = null;
 
+    /**
+     * @throws \Exception
+     */
     public function __construct(
         Category $category,
         User $user,
