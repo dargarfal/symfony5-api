@@ -64,6 +64,9 @@ composer-install: ## Installs composer dependencies
 migrations: ## Runs the migrations
 	U_ID=${UID} docker exec -it --user ${UID} ${DOCKER_BE} bin/console doctrine:migrations:migrate -n
 
+cache: ## Runs the migrations
+	U_ID=${UID} docker exec -it --user ${UID} ${DOCKER_BE} bin/console cache:clear
+
 be-logs: ## Tails the Symfony dev log
 	U_ID=${UID} docker exec -it --user ${UID} ${DOCKER_BE} tail -f var/log/dev.log
 # End backend commands
