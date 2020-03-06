@@ -13,6 +13,7 @@
 .env.local
 .DS_store
 .docker-sync
+.php_cs.cache
 config/jwt
 .php_cs.cache
 ###< Other files ###
