@@ -6,9 +6,9 @@ DOCKER_BE = sf5-expenses-api-be
 ifeq ($(OS),Darwin)
 	UID = $(shell id -u)
 else ifeq ($(OS),Linux)
-  UID = $(shell id -u)
+	UID = $(shell id -u)
 else
-  UID = 1000
+	UID = 1000
 endif
 
 help: ## Show this help message
