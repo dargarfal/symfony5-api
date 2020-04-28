@@ -43,8 +43,6 @@ class TestBase extends WebTestCase
      */
     public function setUp()
     {
-        $this->resetDatabase();
-
         if (null === self::$client) {
             self::$client = static::createClient();
         }
@@ -58,6 +56,8 @@ class TestBase extends WebTestCase
             self::$user = clone self::$client;
             $this->createAuthenticatedUser(self::$user, 'user@api.com', 'password');
         }
+
+        $this->resetDatabase();
     }
 
     private function createAuthenticatedUser(KernelBrowser &$client, string $username, string $password): void
