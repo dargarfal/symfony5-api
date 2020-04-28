@@ -24,11 +24,7 @@
             </cascade>
         </many-to-one>
 
-        <many-to-many field="users" target-entity="App\Entity\User">
-            <cascade>
-                <cascade-remove />
-            </cascade>
-        </many-to-many>
+        <many-to-many field="users" mapped-by="groups" target-entity="App\Entity\User" />
 
         <lifecycle-callbacks>
             <lifecycle-callback type="preUpdate" method="markAsUpdated"/>

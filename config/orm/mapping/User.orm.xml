@@ -22,7 +22,7 @@
             </cascade>
         </one-to-many>
 
-        <many-to-many field="groups" target-entity="App\Entity\Group">
+        <many-to-many field="groups" inversed-by="users" target-entity="App\Entity\Group">
             <cascade>
                 <cascade-remove />
             </cascade>
