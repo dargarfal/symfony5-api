@@ -17,6 +17,9 @@ class UploadAvatar
         $this->imageUploaderService = $imageUploaderService;
     }
 
+    /**
+     * @throws \Exception
+     */
     public function __invoke(Request $request, User $user): User
     {
         return $this->imageUploaderService->uploadAvatar($request, $user);

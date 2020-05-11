@@ -17,4 +17,5 @@
 config/jwt
 .php_cs.cache
 bin/.phpunit
+public/avatars
 ###< Other files ###
