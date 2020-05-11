@@ -9,32 +9,23 @@ use App\Entity\User;
 use App\Exception\User\UserAlreadyExistException;
 use App\Repository\UserRepository;
 use App\Service\Password\EncoderService;
-use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 
 class Register
 {
     private UserRepository $userRepository;
-
-    private JWTTokenManagerInterface $JWTTokenManager;
-
     private EncoderService $encoderService;
 
-    public function __construct(UserRepository $userRepository, JWTTokenManagerInterface $JWTTokenManager, EncoderService $encoderService)
+    public function __construct(UserRepository $userRepository, EncoderService $encoderService)
     {
         $this->userRepository = $userRepository;
-        $this->JWTTokenManager = $JWTTokenManager;
         $this->encoderService = $encoderService;
     }
 
     /**
-     * @Route("/users/register", methods={"POST"})
-     *
      * @throws \Exception
      */
-    public function __invoke(Request $request): JsonResponse
+    public function __invoke(Request $request): User
     {
         $name = RequestTransformer::getRequiredField($request, 'name');
         $email = RequestTransformer::getRequiredField($request, 'email');
@@ -50,8 +41,6 @@ class Register
 
         $this->userRepository->save($user);
 
-        $jwt = $this->JWTTokenManager->create($user);
-
-        return new JsonResponse(['token' => $jwt]);
+        return $user;
     }
 }
