@@ -29,6 +29,20 @@ App\Entity\User:
                     type: string
                   password:
                     type: string
+    upload_avatar:
+      method: 'POST'
+      path: '/users/{id}/avatar'
+      controller: 'App\Api\Action\User\UploadAvatar'
+      openapi_context:
+        requestBody:
+          content:
+            multipart/form-data:
+              schema:
+                type: object
+                properties:
+                  avatar:
+                    type: string
+                    format: binary
   itemOperations:
     get:
       method: 'GET'

@@ -24,6 +24,8 @@ class User implements UserInterface
 
     protected bool $active;
 
+    protected ?string $avatar = null;
+
     protected ?\DateTime $createdAt = null;
 
     protected ?\DateTime $updatedAt = null;
@@ -169,5 +171,15 @@ class User implements UserInterface
     public function isActive(): bool
     {
         return $this->active;
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): void
+    {
+        $this->avatar = $avatar;
     }
 }
