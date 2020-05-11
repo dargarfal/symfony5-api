@@ -21,6 +21,9 @@ class GroupServiceTest extends TestBase
         $this->groupService = new GroupService($this->groupRepository, $this->userRepository);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function testAddUserToGroup(): void
     {
         $groupId = 'group_id_123';
@@ -30,22 +33,35 @@ class GroupServiceTest extends TestBase
         $newUser = new User('new', 'new.user@api.com');
         $group = new Group('group', $user);
 
-        $this->groupRepositoryProphecy->findOneById($groupId)->willReturn($group);
-        $this->groupRepositoryProphecy->userIsMember($group, $user)->willReturn(true);
-        $this->userRepositoryProphecy->findOneById($userId)->willReturn($newUser);
-        $this->groupRepositoryProphecy->userIsMember($group, $newUser)->willReturn(false);
+        $this->groupRepository
+            ->expects($this->exactly(1))
+            ->method('findOneById')
+            ->with($groupId)
+            ->willReturn($group);
 
-        $this->groupRepositoryProphecy->save(
-            Argument::that(
-                function (Group $group): bool {
-                    return true;
-                }
-            )
-        )->shouldBeCalledOnce();
+        $this->groupRepository
+            ->expects($this->exactly(2))
+            ->method('userIsMember')
+            ->with($this->isType('object'), $this->isType('object'))
+            ->willReturn(true, false);
+
+        $this->userRepository
+            ->expects($this->exactly(1))
+            ->method('findOneById')
+            ->with($userId)
+            ->willReturn($newUser);
+
+        $this->groupRepository
+            ->expects($this->exactly(1))
+            ->method('save')
+            ->with($this->isType('object'));
 
         $this->groupService->addUserToGroup($groupId, $userId, $user);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function testRemoveUserFromGroup(): void
     {
         $groupId = 'group_id_123';
@@ -55,18 +71,28 @@ class GroupServiceTest extends TestBase
         $newUser = new User('new', 'new.user@api.com');
         $group = new Group('group', $user);
 
-        $this->groupRepositoryProphecy->findOneById($groupId)->willReturn($group);
-        $this->groupRepositoryProphecy->userIsMember($group, $user)->willReturn(true);
-        $this->userRepositoryProphecy->findOneById($userId)->willReturn($newUser);
-        $this->groupRepositoryProphecy->userIsMember($group, $newUser)->willReturn(true);
+        $this->groupRepository
+            ->expects($this->exactly(1))
+            ->method('findOneById')
+            ->with($groupId)
+            ->willReturn($group);
 
-        $this->groupRepositoryProphecy->save(
-            Argument::that(
-                function (Group $group): bool {
-                    return true;
-                }
-            )
-        )->shouldBeCalledOnce();
+        $this->groupRepository
+            ->expects($this->exactly(2))
+            ->method('userIsMember')
+            ->with($this->isType('object'), $this->isType('object'))
+            ->willReturn(true, true);
+
+        $this->userRepository
+            ->expects($this->exactly(1))
+            ->method('findOneById')
+            ->with($userId)
+            ->willReturn($newUser);
+
+        $this->groupRepository
+            ->expects($this->exactly(1))
+            ->method('save')
+            ->with($this->isType('object'));
 
         $this->groupService->removeUserFromGroup($groupId, $userId, $user);
     }
