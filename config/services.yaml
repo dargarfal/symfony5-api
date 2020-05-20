@@ -56,3 +56,7 @@ services:
 
     ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter:
         tags: [ 'api_platform.filter' ]
+
+    App\Api\Listener\JWTCreatedListener:
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }
